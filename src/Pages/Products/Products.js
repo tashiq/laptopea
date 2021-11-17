@@ -12,7 +12,7 @@ const Products = () => {
             .then(data => setProducts(data))
     }, [])
     return (
-        <div>
+        <div style={{ margin: '0 auto' }}>
             <Navigation></Navigation>
             <Container>
                 <Typography sx={{ my: 4 }} variant="h4">Available Products</Typography>

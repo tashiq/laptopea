@@ -4,8 +4,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, Rating } from '@mui/material';
+import { Link } from 'react-router-dom';
 const Product = ({ product }) => {
-    const { name, price, rating, img, description } = product;
+    const { _id, name, price, rating, img, description } = product;
     return (
         <div>
 
@@ -29,7 +30,9 @@ const Product = ({ product }) => {
                         <Typography component="legend">
                             <Rating name="rating" value={rating} readOnly />({rating})
                         </Typography>
-                        <Button variant="contained">Buy Now</Button>
+                        <Link to={`/purchase/${_id}`} style={{ textDecoration: "none" }}>
+                            <Button variant="contained">Buy Now</Button>
+                        </Link>
                     </CardContent>
                 </CardActionArea>
             </Card>

@@ -1,20 +1,29 @@
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
 import Navigation from '../Shared/Navigation/Navigation';
-
-
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
-    const [userLoginInfo, setUserLoginInfo] = useState({});
+    const [userRegInfo, setUserRegInfo] = useState({});
+    const { registerUser, error } = useAuth();
+    const navigate = useNavigate();
     const handleLoginBlur = e => {
         const type = e.target.name;
         const value = e.target.value;
-        const newInfo = { ...userLoginInfo };
+        const newInfo = { ...userRegInfo };
         newInfo[type] = value;
-        setUserLoginInfo(newInfo);
+        setUserRegInfo(newInfo);
     }
     const handleLoginSubmit = e => {
-        console.log(userLoginInfo);
+        registerUser(userRegInfo.email, userRegInfo.pass, userRegInfo.name, navigate);
+        if (!error) {
+            // console.log(user);
+        }
+        else {
+            alert(error)
+        }
+        // console.log(userRegInfo);
         e.preventDefault();
         e.target.reset();
     }

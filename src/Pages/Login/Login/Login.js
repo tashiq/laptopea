@@ -1,10 +1,15 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../Hooks/useAuth';
 import Navigation from '../../Shared/Navigation/Navigation';
-
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'
 const Login = () => {
     const [userLoginInfo, setUserLoginInfo] = useState({});
+    const { signIn, user, isLoading } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
     const handleLoginBlur = e => {
         const type = e.target.name;
         const value = e.target.value;
@@ -12,9 +17,16 @@ const Login = () => {
         newInfo[type] = value;
         setUserLoginInfo(newInfo);
     }
+    if (user.email) {
+        const where = location?.state?.from || '/home';
+        navigate(where)
+    }
+    if (isLoading) {
+        return <CircularProgress />
+    }
     const handleLoginSubmit = e => {
-        console.log(userLoginInfo);
         e.preventDefault();
+        signIn(userLoginInfo.email, userLoginInfo.pass, navigate, location);
         e.target.reset();
     }
     return (
