@@ -11,6 +11,10 @@ import Products from './Pages/Products/Products';
 import Register from './Pages/Register/Register';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute'
 import Purchase from './Pages/Purchase/Purchase'
+import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
+import Pay from './Pages/Dashboard/Pay/Pay';
+import MyOrders from './Pages/Dashboard/MyOrders/MyOrders';
+import DashReview from './Pages/Dashboard/DashReview/DashReview';
 function App() {
   return (
     <AuthProvider>
@@ -22,6 +26,11 @@ function App() {
           <Route path="products" element={<Products />} />
           <Route path="register" element={<Register />} />
           <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} >
+              <Route path="pay" element={<Pay />} />
+              <Route path="myorders" element={<MyOrders />} />
+              <Route path="review" element={<DashReview />} />
+            </Route>
             <Route path="/purchase/:id" element={<Purchase />} />
           </Route>
 

@@ -1,6 +1,6 @@
 import { Button, Container, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import useAuth from '../../Hooks/useAuth'
 import Navigation from '../Shared/Navigation/Navigation';
 const Purchase = () => {
@@ -8,27 +8,61 @@ const Purchase = () => {
     const { displayName, email } = user;
     const { id } = useParams();
     const [product, setProduct] = useState({})
+    const navigate = useNavigate();
     useEffect(() => {
         fetch(`http://localhost:4000/products/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, []);
+    const preData = { orderBy: displayName, email, productName: product.name };
+    const [orderInfo, setOrderInfo] = useState(preData);
+
+
+    const handleBlur = e => {
+        const name = e.target.name;
+        const value = e.target.value;
+        const newInfo = { ...orderInfo };
+        newInfo[name] = value;
+        setOrderInfo(newInfo)
+    }
+    const handlePlaceorderSubmit = e => {
+        fetch('http://localhost:4000/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(orderInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data?.insertedId) {
+                    alert('Order Placed')
+                }
+                else {
+                    alert('An error occured');
+                }
+                navigate('/products')
+            })
+        e.preventDefault();
+    }
     return (
         <div>
             <Navigation></Navigation>
             <Container sx={{ py: 3 }}>
-                <Typography variant="h4" sx={{ pb: 3 }}>Please Provide required information</Typography>
-                <TextField id="name" label="Name" variant="standard" defaultValue={displayName}
-                    name="name" sx={{ width: '75%', display: '', mb: 3 }} disabled />
-                <TextField id="name" label="Email" variant="standard" defaultValue={email}
-                    name="name" sx={{ width: '75%', display: '', mb: 3 }} disabled />
-                <div style={{ width: '75%', display: '', mb: 3, color: 'grey', borderBottom: '1px solid', padding: '10px 0 12px 0', boxSizing: 'border-box' }} >{product.name}</div>
+                <form onSubmit={handlePlaceorderSubmit}>
+                    <Typography variant="h4" sx={{ pb: 3 }}>Please Provide required information</Typography>
+                    <TextField id="name" label="Name" variant="standard" defaultValue={displayName}
+                        name="name" sx={{ width: '75%', display: '', mb: 3 }} disabled />
+                    <TextField id="name" label="Email" variant="standard" defaultValue={email}
+                        name="name" sx={{ width: '75%', display: '', mb: 3 }} disabled />
+                    <div style={{ width: '75%', display: '', mb: 3, color: 'grey', borderBottom: '1px solid', padding: '10px 0 12px 0', boxSizing: 'border-box' }} >{product.name}</div>
 
-                <TextField id="phone" label="Phone Number" variant="standard"
-                    name="phone" sx={{ width: '75%', display: '', mb: 3 }} required />
-                <TextField id="address" label="Address" variant="standard"
-                    name="address" sx={{ width: '75%', display: '', mb: 3 }} />
-                <Button variant="contained" sx={{ width: '75%', display: '', mb: 3 }}>Place Order</Button>
+                    <TextField id="phone" label="Phone Number" variant="standard"
+                        name="phone" sx={{ width: '75%', display: '', mb: 3 }} required />
+                    <TextField id="address" label="Address" variant="standard"
+                        name="address" sx={{ width: '75%', display: '', mb: 3 }} onBlur={handleBlur} />
+                    <Button variant="contained" sx={{ width: '75%', display: '', mb: 3 }} type="submit">Place Order</Button>
+                </form>
             </Container>
         </div>
     );

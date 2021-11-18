@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, List, ListItem, Typography } from '@mui/material';
+import { Grid, List, ListItem, Typography } from '@mui/material';
 const footerStyle = {
     padding: '20px 30px',
     backgroundColor: '#212d38',

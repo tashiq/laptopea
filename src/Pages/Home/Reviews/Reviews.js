@@ -1,17 +1,16 @@
 import { Container, Grid, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Review from '../Review/Review';
 
 
-const sample = [
-    {
-        name: 'Abul',
-        rating: 4,
-        comment: 'I suspect that the problem lies in the fact that you are calling your state setter immediately inside the function component body, which forces React to re-invoke your function again, with the same props, which ends up calling the state setter again, which triggers React to call your function again.... and so on.'
-    }
-]
+
 const Reviews = () => {
-    const [reviews, setReviews] = useState(sample)
+    const [reviews, setReviews] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:4000/reviews')
+            .then(res => res.json())
+            .then(data => setReviews(data))
+    }, [])
 
     return (
         <div className="container">

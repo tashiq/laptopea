@@ -23,9 +23,17 @@ const Navigation = () => {
                         <Button color="inherit">Products</Button>
                     </Link>
                     {
-                        user.email ? <Button variant="outlined" sx={{ color: 'white' }} onClick={logOut}>Logout ({user.displayName})</Button> : <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
-                            <Button color="inherit">Login</Button>
-                        </Link>
+                        user.email ?
+                            <div>
+                                <Link to="/dashboard" style={{ textDecoration: 'none', color: 'white' }}>
+                                    <Button color="inherit">Dashboard</Button>
+                                </Link>
+
+                                <Button variant="outlined" sx={{ color: 'white' }} onClick={logOut}>Logout ({user.displayName})</Button>
+                            </div>
+                            : <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
+                                <Button color="inherit">Login</Button>
+                            </Link>
                     }
                 </Toolbar>
             </AppBar>
