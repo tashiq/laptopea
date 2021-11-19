@@ -19,6 +19,14 @@ import { Outlet } from 'react-router';
 const drawerWidth = 240;
 
 function Dashboard(props) {
+    const [currentUser, setCurrentUser] = React.useState('');
+    const { user } = useAuth();
+    React.useEffect(() => {
+        fetch(`http://localhost:4000/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => setCurrentUser(data))
+    }, [user])
+
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -30,24 +38,52 @@ function Dashboard(props) {
         <div>
             <Toolbar />
             <Divider />
-            <List>
-                <ListItem>
-                    <Link to='/home' style={{ textDecoration: 'none', color: 'black' }}>
-                        <ListItemText primary={'Home'} style={{ textTransform: 'uppercase' }} /></Link>
-                </ListItem>
-                <ListItem>
-                    <Link to='pay' style={{ textDecoration: 'none', color: 'black' }}>
-                        <ListItemText primary={'Pay'} style={{ textTransform: 'uppercase' }} /></Link>
-                </ListItem>
-                <ListItem>
-                    <Link to='myorders' style={{ textDecoration: 'none', color: 'black' }}>
-                        <ListItemText primary={'My Orders'} style={{ textTransform: 'uppercase' }} /></Link>
-                </ListItem>
-                <ListItem>
-                    <Link to='review' style={{ textDecoration: 'none', color: 'black' }}>
-                        <ListItemText primary={'Review'} style={{ textTransform: 'uppercase' }} /></Link>
-                </ListItem>
-            </List>
+            {user.email && currentUser.role &&
+
+                <List>
+                    <ListItem>
+                        <Link to='/home' style={{ textDecoration: 'none', color: 'black' }}>
+                            <ListItemText primary={'Home'} style={{ textTransform: 'uppercase' }} /></Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link to='add' style={{ textDecoration: 'none', color: 'black' }}>
+                            <ListItemText primary={'Add A Product'} style={{ textTransform: 'uppercase' }} /></Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link to='manageorders' style={{ textDecoration: 'none', color: 'black' }}>
+                            <ListItemText primary={'Manage All Orders'} style={{ textTransform: 'uppercase' }} /></Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link to='manageproducts' style={{ textDecoration: 'none', color: 'black' }}>
+                            <ListItemText primary={'Manage Products'} style={{ textTransform: 'uppercase' }} /></Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link to='makeadmin' style={{ textDecoration: 'none', color: 'black' }}>
+                            <ListItemText primary={'Make An Admin'} style={{ textTransform: 'uppercase' }} /></Link>
+                    </ListItem>
+                </List>
+            }
+            {
+                user.email && !currentUser.role &&
+                <List>
+                    <ListItem>
+                        <Link to='/home' style={{ textDecoration: 'none', color: 'black' }}>
+                            <ListItemText primary={'Home'} style={{ textTransform: 'uppercase' }} /></Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link to='pay' style={{ textDecoration: 'none', color: 'black' }}>
+                            <ListItemText primary={'Pay'} style={{ textTransform: 'uppercase' }} /></Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link to='myorders' style={{ textDecoration: 'none', color: 'black' }}>
+                            <ListItemText primary={'My Orders'} style={{ textTransform: 'uppercase' }} /></Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link to='review' style={{ textDecoration: 'none', color: 'black' }}>
+                            <ListItemText primary={'Review'} style={{ textTransform: 'uppercase' }} /></Link>
+                    </ListItem>
+                </List>
+            }
             <Divider />
             <List>
                 {['Logout'].map((text, index) => (

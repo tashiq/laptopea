@@ -9,7 +9,7 @@ const useFirebase = () => {
     const [user, setUser] = useState([]);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const registerUser = (email, pass, name, navigate) => {
+    const registerUser = (email, pass, name, navigate, phone) => {
         setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
@@ -18,6 +18,15 @@ const useFirebase = () => {
                     displayName: name
                 })
                     .then(() => {
+                        const newUser = { name, email, phone };
+                        fetch('http://localhost:4000/users', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(newUser)
+                        })
+                            .then(res => res.json())
                         //update name
                         setError('');
                         alert('New User Created');

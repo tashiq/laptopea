@@ -16,7 +16,7 @@ const Register = () => {
         setUserRegInfo(newInfo);
     }
     const handleLoginSubmit = e => {
-        registerUser(userRegInfo.email, userRegInfo.pass, userRegInfo.name, navigate);
+        registerUser(userRegInfo.email, userRegInfo.pass, userRegInfo.name, navigate, userRegInfo.phone);
         if (!error) {
             // console.log(user);
         }

@@ -1,5 +1,6 @@
-import { Container, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Product from '../../Shared/Product/Product';
 
 const Trending = () => {
@@ -17,8 +18,12 @@ const Trending = () => {
                 <Grid container spacing={2}>
                     {
                         products.map((product, index) => {
-                            if (index > 6) {
-                                return <Product key={product._id} product={product}></Product>
+                            if (index > 6 && index < 11) {
+                                return <Product key={product._id} product={product}>
+                                    <Link to={`/purchase/${product._id}`} style={{ textDecoration: "none" }}>
+                                        <Button variant="contained">Buy Now</Button>
+                                    </Link>
+                                </Product>
                             }
                             else {
                                 return <></>

@@ -1,5 +1,6 @@
-import { Container, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../Shared/Footer/Footer';
 import Navigation from '../Shared/Navigation/Navigation';
 import Product from '../Shared/Product/Product';
@@ -18,7 +19,11 @@ const Products = () => {
                 <Typography sx={{ my: 4 }} variant="h4">Available Products</Typography>
                 <Grid container spacing={2}>
                     {
-                        products.map((product) => <Product key={product._id} product={product}></Product>)
+                        products.map((product) => <Product key={product._id} product={product}>
+                            <Link to={`/purchase/${product._id}`} style={{ textDecoration: "none" }}>
+                                <Button variant="contained">Buy Now</Button>
+                            </Link>
+                        </Product>)
                     }
                 </Grid>
             </Container>

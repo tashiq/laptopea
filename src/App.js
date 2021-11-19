@@ -15,6 +15,11 @@ import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import Pay from './Pages/Dashboard/Pay/Pay';
 import MyOrders from './Pages/Dashboard/MyOrders/MyOrders';
 import DashReview from './Pages/Dashboard/DashReview/DashReview';
+import AdminRoute from './Pages/Login/AdminRoute/AdminRoute';
+import MakeAdmin from './Pages/Dashboard/MakeAdmin/MakeAdmin';
+import AddProduct from './Pages/Dashboard/AddProduct/AddProduct';
+import ManageProduct from './Pages/Dashboard/ManageProduct/ManageProduct';
+import ManageOrders from './Pages/Dashboard/ManageOrders/ManageOrders';
 function App() {
   return (
     <AuthProvider>
@@ -30,6 +35,13 @@ function App() {
               <Route path="pay" element={<Pay />} />
               <Route path="myorders" element={<MyOrders />} />
               <Route path="review" element={<DashReview />} />
+              <Route path="add" element={<AddProduct />} />
+              <Route path="manageorders" element={<ManageOrders />} />
+              <Route path="manageproducts" element={<ManageProduct />} />
+              <Route path="makeadmin" element={<MakeAdmin />} />
+              <Route element={<AdminRoute />} >
+
+              </Route>
             </Route>
             <Route path="/purchase/:id" element={<Purchase />} />
           </Route>

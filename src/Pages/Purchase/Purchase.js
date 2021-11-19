@@ -14,7 +14,8 @@ const Purchase = () => {
             .then(res => res.json())
             .then(data => setProduct(data))
     }, []);
-    const preData = { orderBy: displayName, email, productName: product.name };
+    const preData = { orderBy: displayName, email };
+    // console.log(preData);
     const [orderInfo, setOrderInfo] = useState(preData);
 
 
@@ -26,6 +27,7 @@ const Purchase = () => {
         setOrderInfo(newInfo)
     }
     const handlePlaceorderSubmit = e => {
+        orderInfo['product'] = product;
         fetch('http://localhost:4000/orders', {
             method: 'POST',
             headers: {
