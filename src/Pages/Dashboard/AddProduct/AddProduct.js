@@ -13,7 +13,7 @@ const AddProduct = () => {
         setAddProduct(newData);
     }
     const handleAddSubmit = e => {
-        fetch("http://localhost:4000/products", {
+        fetch("https://floating-mountain-42780.herokuapp.com/products", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

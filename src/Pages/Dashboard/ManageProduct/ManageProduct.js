@@ -5,14 +5,14 @@ import Product from '../../Shared/Product/Product';
 const ManageProduct = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:4000/products')
+        fetch('https://floating-mountain-42780.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
     const handleManageSubmit = (productId) => {
         const ans = window.confirm('Do you wanna delete?');
         if (ans) {
-            fetch(`http://localhost:4000/products/${productId}`, {
+            fetch(`https://floating-mountain-42780.herokuapp.com/products/${productId}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

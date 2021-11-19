@@ -22,7 +22,7 @@ function Dashboard(props) {
     const [currentUser, setCurrentUser] = React.useState('');
     const { user } = useAuth();
     React.useEffect(() => {
-        fetch(`http://localhost:4000/users/${user.email}`)
+        fetch(`https://floating-mountain-42780.herokuapp.com/users/${user.email}`)
             .then(res => res.json())
             .then(data => setCurrentUser(data))
     }, [user])

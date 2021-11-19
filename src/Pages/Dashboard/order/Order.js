@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 const Order = ({ orderedBy, email, product, _id, shipped }) => {
     const [isShipped, setIsShipped] = useState(shipped)
     const handleShipped = e => {
-        fetch(`http://localhost:4000/orders/${_id}`, {
+        fetch(`https://floating-mountain-42780.herokuapp.com/orders/${_id}`, {
             method: 'PUT'
         })
             .then(res => res.json())

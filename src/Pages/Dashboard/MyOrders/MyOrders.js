@@ -9,7 +9,7 @@ const MyOrders = () => {
     useEffect(
         () => {
 
-            fetch(`http://localhost:4000/orders/${user.email}`)
+            fetch(`https://floating-mountain-42780.herokuapp.com/orders/${user.email}`)
                 .then(res => res.json())
                 .then(data => setMyOrders(data))
         }, [user]);

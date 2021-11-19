@@ -10,7 +10,7 @@ const Purchase = () => {
     const [product, setProduct] = useState({})
     const navigate = useNavigate();
     useEffect(() => {
-        fetch(`http://localhost:4000/products/${id}`)
+        fetch(`https://floating-mountain-42780.herokuapp.com/products/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, []);
@@ -28,7 +28,7 @@ const Purchase = () => {
     }
     const handlePlaceorderSubmit = e => {
         orderInfo['product'] = product;
-        fetch('http://localhost:4000/orders', {
+        fetch('https://floating-mountain-42780.herokuapp.com/orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

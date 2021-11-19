@@ -19,7 +19,7 @@ const useFirebase = () => {
                 })
                     .then(() => {
                         const newUser = { name, email, phone };
-                        fetch('http://localhost:4000/users', {
+                        fetch('https://floating-mountain-42780.herokuapp.com/users', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

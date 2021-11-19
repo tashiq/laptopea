@@ -10,7 +10,7 @@ const MakeAdmin = () => {
         setEmail(e.target.value);
     }
     const handleAdminSubmit = e => {
-        fetch(`http://localhost:4000/users/${user.email}`)
+        fetch(`https://floating-mountain-42780.herokuapp.com/users/${user.email}`)
             .then(res => res.json())
             .then(isAdmin => {
                 // console.log(isAdmin.role);
@@ -19,7 +19,7 @@ const MakeAdmin = () => {
                     navigate('/')
                 }
                 else {
-                    fetch(`http://localhost:4000/admin?email=${email}`, {
+                    fetch(`https://floating-mountain-42780.herokuapp.com/admin?email=${email}`, {
                         method: 'PUT',
                     })
                         .then(res => res.json())

@@ -19,7 +19,7 @@ const DashReview = () => {
         const toStore = { name, rating, comment };
 
 
-        fetch('http://localhost:4000/reviews', {
+        fetch('https://floating-mountain-42780.herokuapp.com/reviews', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
