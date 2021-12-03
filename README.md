@@ -17,3 +17,6 @@ Laptopea
 
 5. Gamming laptops are at reasonable price
 
+6. 3 different users possible Normal user, signed in user and admin.
+Email verification available.
+
