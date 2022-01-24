@@ -7,6 +7,7 @@ import Reviews from '../Reviews/Reviews';
 import Trending from '../Trending/Trending';
 
 const Home = () => {
+    document.title = 'Laptopea | Home'
     return (
         <div>
             <Navigation></Navigation>

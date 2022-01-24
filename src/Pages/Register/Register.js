@@ -8,6 +8,7 @@ const Register = () => {
     const [userRegInfo, setUserRegInfo] = useState({});
     const { registerUser, error } = useAuth();
     const navigate = useNavigate();
+    document.title = 'Laptopea | Register'
     const handleLoginBlur = e => {
         const type = e.target.name;
         const value = e.target.value;

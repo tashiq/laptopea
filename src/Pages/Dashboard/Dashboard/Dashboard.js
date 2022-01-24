@@ -19,6 +19,7 @@ import { Outlet } from 'react-router';
 const drawerWidth = 240;
 
 function Dashboard(props) {
+    document.title = 'Laptopea | Dashboard';
     const [currentUser, setCurrentUser] = React.useState('');
     const { user } = useAuth();
     React.useEffect(() => {

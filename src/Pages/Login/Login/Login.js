@@ -10,6 +10,7 @@ const Login = () => {
     const { signIn, user, isLoading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+    document.title = 'Laptopea | Login'
     const handleLoginBlur = e => {
         const type = e.target.name;
         const value = e.target.value;
@@ -40,10 +41,10 @@ const Login = () => {
 
                             <TextField id="email" label="Email" variant="standard"
                                 name="email"
-                                onBlur={handleLoginBlur}
+                                onChange={handleLoginBlur}
                                 type="email" sx={{ width: '75%', display: ' ', mb: 3 }} />
                             <TextField id="pass" label="Password" variant="standard"
-                                onBlur={handleLoginBlur}
+                                onChange={handleLoginBlur}
                                 name="pass"
                                 type="password" sx={{ width: '75%', display: ' ', mb: 3 }} />
                             <Button type="submit" variant="contained" sx={{ width: '75%' }}>Login</Button>

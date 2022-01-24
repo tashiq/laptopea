@@ -7,6 +7,7 @@ import Product from '../Shared/Product/Product';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
+    document.title = 'Laptopea | Products'
     useEffect(() => {
         fetch('https://floating-mountain-42780.herokuapp.com/products')
             .then(res => res.json())
